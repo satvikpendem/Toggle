@@ -1,0 +1,128 @@
+:root {
+  --t-speed: 0.5s;
+}
+
+body {
+  background-color: white;
+  padding: 0;
+  margin: 0;
+}
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  height: 100px;
+}
+
+input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+svg * {
+  transition: var(--t-speed);
+}
+
+svg {
+  width: 100px;
+}
+
+svg > .sun > .spoke {
+  fill: rgb(255, 230, 0);
+}
+
+svg > .sun > .core {
+  fill: rgb(255, 230, 0);
+}
+
+svg > .sun > .crescent {
+  fill: #faff00;
+}
+
+svg .background {
+  fill: url(#sky-gradient);
+}
+
+svg > .night-sky > * {
+  opacity: 0;
+}
+
+svg > .night-sky > .constellations > * {
+  fill-opacity: 0;
+}
+
+input:checked + svg > .sun {
+  transform: translate(100px);
+  transition: var(--t-speed);
+}
+
+input:checked + svg > .sun > circle {
+  fill: white;
+  transition: var(--t-speed);
+}
+
+input:checked + svg > .sun > .crescent {
+  fill: #5200ff;
+}
+
+input:checked + svg > .sun > .spoke {
+  opacity: 0;
+  transition: calc(var(--t-speed) / 2);
+}
+
+input:checked + svg > .background {
+  fill: url(#sky-gradient);
+}
+
+input:checked + svg > .clouds > .cloud {
+  /* fill: #282828; */
+  fill: #474747;
+  transition: var(--t-speed);
+  transform: translate(-100px, 20px);
+}
+
+input:checked + svg > .clouds > .cloud-three {
+  opacity: 0;
+}
+
+input:checked + svg > .night-sky > * {
+  opacity: 1;
+}
+
+input:checked + svg > .night-sky > .constellations > .orion {
+  opacity: 1;
+  stroke-dasharray: 158.3125;
+  stroke-dashoffset: 158.3125;
+  animation: orion calc(var(--t-speed) * 3) linear forwards;
+}
+
+input:checked + svg > .night-sky > .constellations > .dipper {
+  opacity: 1;
+  stroke-dasharray: 106.28192138671875;
+  stroke-dashoffset: 106.28192138671875;
+  animation: dipper calc(var(--t-speed) * 4) linear forwards;
+}
+
+@keyframes orion {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dipper {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+input:checked ~ svg > defs > linearGradient > .sky-gradient-begin {
+  stop-color: #282828;
+}
+
+input:checked ~ svg > defs > linearGradient > .sky-gradient-end {
+  stop-color: #000000;
+}
